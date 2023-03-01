@@ -1,0 +1,19 @@
+name: test
+on:
+  push:
+    branches:
+        - "main"
+        - "dev"
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+        - name: checkout
+          uses: actions/checkout@v3
+        
+        - name: test git command
+          run: |
+            git show-branch --sha1-name
+            git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+
