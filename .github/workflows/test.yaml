@@ -16,4 +16,5 @@ jobs:
           run: |
             git show-branch --sha1-name
             git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+            git show-branch --sha1-name HEAD "$(git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}')" | tail -2 | head -1| awk -F'[]~^[]' '{print $2}'
 
